@@ -26,7 +26,7 @@ char c[9] = {1,8,28,56,70,56,28,8,1};
 
     return buffer;
 }*/
-
+Datum hammingnn(PG_FUNCTION_ARGS);
 PG_FUNCTION_INFO_V1(hammingnn);
 /*int16* hammingnn(int q, int r);
 int main() {
@@ -49,7 +49,8 @@ Datum hammingnn(PG_FUNCTION_ARGS) {
     bool        typbyval;
     char        typalign;
     get_typlenbyvalalign(element_type, &typlen, &typbyval, &typalign);
-    ArrayType* result = construct_array(
+    ArrayType* result;
+    result = construct_array(
 (Datum*) values,
 c[r],
 element_type,
@@ -340,8 +341,10 @@ typalign
     if(r == 8) {
     	values[0] = q^0xFF;
 	PG_RETURN_ARRAYTYPE_P(result);
+    } else
+    {
+    	PG_RETURN_ARRAYTYPE_P(result);
     }
-    
 }
 
 /*int16* hammingnn(int q, int r) {    

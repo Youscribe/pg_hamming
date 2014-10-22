@@ -1,0 +1,8 @@
+/* $PostgreSQL $ */
+
+-- Adjust this setting to control where the objects get created.
+SET search_path = public;
+
+CREATE OR REPLACE FUNCTION hammingnn(smallint, int4) RETURNS bool
+AS 'MODULE_PATHNAME', 'hammingnn'
+LANGUAGE C STABLE STRICT;

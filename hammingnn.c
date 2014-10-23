@@ -9,7 +9,7 @@
 PG_MODULE_MAGIC;
 #endif
 
-char c[9] = {1,8,28,56,70,56,28,8,1};
+
 // buffer must have length >= sizeof(int) + 1
 // Write to the buffer backwards so that the binary representation
 // is in the correct order i.e.  the LSB is on the far right
@@ -42,9 +42,10 @@ int main() {
 	free(arr);
 }*/
 Datum hammingnn(PG_FUNCTION_ARGS) {
+    char c[9] = {1,8,28,56,70,56,28,8,1};
     int16   q = PG_GETARG_INT16(0);
-    int32   r = PG_GETARG_INT32(0);
-    int16* values = (int16*)palloc(c[r]*sizeof(int16));
+    int32   r = PG_GETARG_INT32(1);
+    Datum* values = palloc(c[r]*sizeof(Datum));
     Oid element_type = get_fn_expr_argtype(fcinfo->flinfo, 0);
     int16       typlen;
     bool        typbyval;
@@ -53,7 +54,6 @@ Datum hammingnn(PG_FUNCTION_ARGS) {
     
     if(r == 0) {
     	values[0] = q;
-	PG_RETURN_ARRAYTYPE_P(result);
     } else {
     if(r == 1) {
     	values[0] = q^0x1;
@@ -64,7 +64,6 @@ Datum hammingnn(PG_FUNCTION_ARGS) {
 	values[5] = q^0x20;
 	values[6] = q^0x40;
 	values[7] = q^0x80;
-	PG_RETURN_ARRAYTYPE_P(result);
     } else {
     if(r == 2) {
     	values[0] = q^0x3;
@@ -95,7 +94,6 @@ Datum hammingnn(PG_FUNCTION_ARGS) {
 	values[25] = q^0x60;
 	values[26] = q^0xA0;
 	values[27] = q^0xC0;
-	PG_RETURN_ARRAYTYPE_P(result);
     } else {
 	    if(r == 3) {
 		values[0] = q^0x7;
@@ -154,7 +152,6 @@ Datum hammingnn(PG_FUNCTION_ARGS) {
 		values[53] = q^0xB0;
 		values[54] = q^0xD0;
 		values[56] = q^0xE0;
-		PG_RETURN_ARRAYTYPE_P(result);
 	    } else {
 
 	    if(r == 4) {
@@ -228,7 +225,6 @@ Datum hammingnn(PG_FUNCTION_ARGS) {
 		values[68] = q^0xD8;
 		values[69] = q^0xE8;
 		values[70] = q^0xF0;
-		PG_RETURN_ARRAYTYPE_P(result);
 	    } else {
 		    if(r == 5) {
 			values[0] = q^(0x7^0xFF);
@@ -287,7 +283,6 @@ Datum hammingnn(PG_FUNCTION_ARGS) {
 			values[53] = q^(0xB0^0xFF);
 			values[54] = q^(0xD0^0xFF);
 			values[56] = q^(0xE0^0xFF);
-			PG_RETURN_ARRAYTYPE_P(result);
 		    } else {
 			    if(r == 6) {
 			    	values[0] = q^(0x3^0xFF);
@@ -318,7 +313,6 @@ Datum hammingnn(PG_FUNCTION_ARGS) {
 				values[25] = q^(0x60^0xFF);
 				values[26] = q^(0xA0^0xFF);
 				values[27] = q^(0xC0^0xFF);
-				PG_RETURN_ARRAYTYPE_P(result);
 			    } else {
 				    if(r == 7) {
 				    	values[0] = q^(0x1^0xFF);
@@ -329,14 +323,9 @@ Datum hammingnn(PG_FUNCTION_ARGS) {
 					values[5] = q^(0x20^0xFF);
 					values[6] = q^(0x40^0xFF);
 					values[7] = q^(0x80^0xFF);
-					PG_RETURN_ARRAYTYPE_P(result);
 				    } else {
 					    if(r == 8) {
 					    	values[0] = q^0xFF;
-						PG_RETURN_ARRAYTYPE_P(result);
-					    } else
-					    {
-					    	PG_RETURN_ARRAYTYPE_P(result);
 					    }
 				    }
 			    }
@@ -348,7 +337,7 @@ Datum hammingnn(PG_FUNCTION_ARGS) {
 }
     get_typlenbyvalalign(element_type, &typlen, &typbyval, &typalign);
     result = construct_array(
-	(Datum*) values,
+	values,
 	c[r],
 	element_type,
 	typlen,

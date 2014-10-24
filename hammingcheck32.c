@@ -1,0 +1,98 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include "postgres.h"
+#include "fmgr.h"
+#include "utils/array.h"
+
+Datum hammingcheck32(PG_FUNCTION_ARGS);
+PG_FUNCTION_INFO_V1(hammingcheck32);
+Datum hammingcheck32(PG_FUNCTION_ARGS) {
+  int64 w0 = PG_GETARG_INT64(0);
+  int64 w1 = PG_GETARG_INT64(1);
+  int64 w2 = PG_GETARG_INT64(2);
+  int64 w3 = PG_GETARG_INT64(3);
+  int64 t0 = PG_GETARG_INT64(4);
+  int64 t1 = PG_GETARG_INT64(5);
+  int64 t2 = PG_GETARG_INT64(6);
+  int64 t3 = PG_GETARG_INT64(7);
+  int64 r = PG_GETARG_INT16(8);
+  int16 dist = 0;
+  int i;
+  int64 b = w0;
+  int64 a = t0;
+  for (i = 0; i < 8; ++i)
+  {
+     if((0x1 & a) ^ (0x1 & b)) ++dist;
+     if((0x2 & a) ^ (0x2 & b)) ++dist;
+     if((0x4 & a) ^ (0x4 & b)) ++dist;
+     if((0x8 & a) ^ (0x8 & b)) ++dist;
+     if((0x10 & a) ^ (0x10 & b)) ++dist;
+     if((0x20 & a) ^ (0x20 & b)) ++dist;
+     if((0x40 & a) ^ (0x40 & b)) ++dist;
+     if((0x80 & a) ^ (0x80 & b)) ++dist;
+
+      if(dist > r) {
+	PG_RETURN_INT16(dist);
+      }
+      a = a >> 8;
+      b = b >> 8;
+  }
+  b = w1;
+  a = t1;
+  for (i = 0; i < 8; ++i)
+  {
+     if((0x1 & a) ^ (0x1 & b)) ++dist;
+     if((0x2 & a) ^ (0x2 & b)) ++dist;
+     if((0x4 & a) ^ (0x4 & b)) ++dist;
+     if((0x8 & a) ^ (0x8 & b)) ++dist;
+     if((0x10 & a) ^ (0x10 & b)) ++dist;
+     if((0x20 & a) ^ (0x20 & b)) ++dist;
+     if((0x40 & a) ^ (0x40 & b)) ++dist;
+     if((0x80 & a) ^ (0x80 & b)) ++dist;
+
+      if(dist > r) {
+	PG_RETURN_INT16(dist);
+      }
+      a = a >> 8;
+      b = b >> 8;
+  }
+  b = w2;
+  a = t2;
+  for (i = 0; i < 8; ++i)
+  {
+     if((0x1 & a) ^ (0x1 & b)) ++dist;
+     if((0x2 & a) ^ (0x2 & b)) ++dist;
+     if((0x4 & a) ^ (0x4 & b)) ++dist;
+     if((0x8 & a) ^ (0x8 & b)) ++dist;
+     if((0x10 & a) ^ (0x10 & b)) ++dist;
+     if((0x20 & a) ^ (0x20 & b)) ++dist;
+     if((0x40 & a) ^ (0x40 & b)) ++dist;
+     if((0x80 & a) ^ (0x80 & b)) ++dist;
+
+      if(dist > r) {
+	PG_RETURN_INT16(dist);
+      }
+      a = a >> 8;
+      b = b >> 8;
+  }
+  b = w3;
+  a = t3;
+  for (i = 0; i < 8; ++i)
+  {
+     if((0x1 & a) ^ (0x1 & b)) ++dist;
+     if((0x2 & a) ^ (0x2 & b)) ++dist;
+     if((0x4 & a) ^ (0x4 & b)) ++dist;
+     if((0x8 & a) ^ (0x8 & b)) ++dist;
+     if((0x10 & a) ^ (0x10 & b)) ++dist;
+     if((0x20 & a) ^ (0x20 & b)) ++dist;
+     if((0x40 & a) ^ (0x40 & b)) ++dist;
+     if((0x80 & a) ^ (0x80 & b)) ++dist;
+
+      if(dist > r) {
+	PG_RETURN_INT16(dist);
+      }
+      a = a >> 8;
+      b = b >> 8;
+  }
+  PG_RETURN_INT16(dist);   
+}

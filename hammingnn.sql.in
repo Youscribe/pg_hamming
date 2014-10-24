@@ -7,6 +7,10 @@ CREATE OR REPLACE FUNCTION hammingnn(smallint, int4) RETURNS smallint[]
 AS 'MODULE_PATHNAME', 'hammingnn'
 LANGUAGE C STRICT;
 
-CREATE OR REPLACE FUNCTION hammingcheck(smallint, smallint[], smallint[], smallint) RETURNS smallint
-AS 'MODULE_PATHNAME', 'hammingcheck'
+CREATE OR REPLACE FUNCTION hammingcheck16(bigint, bigint, bigint, bigint,smallint) RETURNS smallint
+AS 'MODULE_PATHNAME', 'hammingcheck16'
+LANGUAGE C STRICT;
+
+CREATE OR REPLACE FUNCTION hammingcheck32(bigint, bigint, bigint, bigint,bigint, bigint, bigint, bigint, smallint) RETURNS smallint
+AS 'MODULE_PATHNAME', 'hammingcheck32'
 LANGUAGE C STRICT;

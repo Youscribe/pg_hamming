@@ -19,7 +19,7 @@ void rec_combination64(char startbit, char nb_bits_picks, Datum * memwrite);
 void rec_combination64(char startbit, char nb_bits_picks, Datum * memwrite) {	
 	if(nb_bits_picks != 0) {
 		if(startbit != 7) {
-			short tmp_value;
+			int64 tmp_value;
 			tmp_value = global_value64;
 			//check if we can afford to not switch the bit
 			if(startbit >= nb_bits_picks) {

@@ -17,7 +17,7 @@ void rec_combination32(char startbit, char nb_bits_picks, Datum * memwrite);
 void rec_combination32(char startbit, char nb_bits_picks, Datum * memwrite) {	
 	if(nb_bits_picks != 0 && global_index32<maxValues) {
 		if(startbit != 7) {
-			short tmp_value;
+			int32 tmp_value;
 			tmp_value = global_value32;
 			//check if we can afford to not switch the bit
 			if(startbit >= nb_bits_picks) {

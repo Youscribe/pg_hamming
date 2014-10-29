@@ -11,11 +11,11 @@ CREATE OR REPLACE FUNCTION hammingball32(int4, int4, int4) RETURNS smallint[]
 AS 'MODULE_PATHNAME', 'hammingball16'
 LANGUAGE C STRICT;
 
-CREATE OR REPLACE FUNCTION hammingball32(int4, int4, int4) RETURNS smallint[]
+CREATE OR REPLACE FUNCTION hammingball32(int4, int4, int4) RETURNS int4[]
 AS 'MODULE_PATHNAME', 'hammingball32'
 LANGUAGE C STRICT;
 
-CREATE OR REPLACE FUNCTION hammingball64(int8, int4) RETURNS smallint[]
+CREATE OR REPLACE FUNCTION hammingball64(int8, int4) RETURNS int8[]
 AS 'MODULE_PATHNAME', 'hammingball64'
 LANGUAGE C STRICT;
 

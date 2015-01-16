@@ -19,6 +19,10 @@ CREATE OR REPLACE FUNCTION hammingball64(int8, int4) RETURNS int8[]
 AS 'MODULE_PATHNAME', 'hammingball64'
 LANGUAGE C STRICT;
 
+CREATE OR REPLACE FUNCTION hammingcheck8(bigint, bigint,smallint) RETURNS smallint
+AS 'MODULE_PATHNAME', 'hammingcheck8'
+LANGUAGE C STRICT;
+
 CREATE OR REPLACE FUNCTION hammingcheck16(bigint, bigint, bigint, bigint,smallint) RETURNS smallint
 AS 'MODULE_PATHNAME', 'hammingcheck16'
 LANGUAGE C STRICT;

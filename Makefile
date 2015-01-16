@@ -1,7 +1,7 @@
 # $PostgreSQL $
 
 MODULE_big = hammingnn
-OBJS = hammingnn.o hammingball16.o hammingball32.o hammingball64.o hammingcheck16.o hammingcheck32.o
+OBJS = hammingnn.o hammingball16.o hammingball32.o hammingball64.o hammingcheck8.o hammingcheck16.o hammingcheck32.o
 DATA_built = hammingnn.sql
 DATA = uninstall_hammingnn.sql
 
